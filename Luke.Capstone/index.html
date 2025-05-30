@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Neighborhood Carwash - Premium Car Care Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/><circle cx="20" cy="20" r="1" fill="white" opacity="0.15"/><circle cx="80" cy="30" r="1.5" fill="white" opacity="0.1"/><circle cx="30" cy="70" r="1" fill="white" opacity="0.2"/><circle cx="70" cy="80" r="2" fill="white" opacity="0.1"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) translateX(0px); }
+            33% { transform: translateY(-10px) translateX(5px); }
+            66% { transform: translateY(5px) translateX(-5px); }
+            100% { transform: translateY(0px) translateX(0px); }
+        }
+
+        .hero-content {
+            z-index: 2;
+            position: relative;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: slideInDown 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: slideInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes slideInDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            animation: none;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+            50% { box-shadow: 0 4px 25px rgba(255, 107, 107, 0.4); }
+            100% { box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(255,255,255,0.98);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            height: 50px;
+            width: auto;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a, nav button {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after, nav button::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after, nav button:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover, nav button:hover {
+            color: #667eea;
+        }
+
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .services {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .services h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: #333;
+            position: relative;
+        }
+
+        .services h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .service-card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .about {
+            background: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .about p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        .contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-5px);
+        }
+
+        .contact-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .water-drops {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .drop {
+            position: absolute;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.2rem; }
+            .about-content { grid-template-columns: 1fr; }
+            .features { grid-template-columns: 1fr; }
+            .nav-container { flex-direction: column; gap: 1rem; }
+            .nav-container ul { gap: 1rem; }
+            .logo { height: 40px; }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <img src="logo.jpg" alt="The Neighborhood Carwash Logo" class="logo">
+            <ul>
+                <li><button onclick="document.getElementById('home').scrollIntoView({behavior: 'smooth'})" style="background: none; border: none; color: #333; font-weight: 500; cursor: pointer; font-size: inherit; font-family: inherit;">Home</button></li>
+                <li><button onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})" style="background: none; border: none; color: #333; font-weight: 500; cursor: pointer; font-size: inherit; font-family: inherit;">Services</button></li>
+                <li><button onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})" style="background: none; border: none; color: #333; font-weight: 500; cursor: pointer; font-size: inherit; font-family: inherit;">About</button></li>
+                <li><button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" style="background: none; border: none; color: #333; font-weight: 500; cursor: pointer; font-size: inherit; font-family: inherit;">Contact</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="water-drops"></div>
+        <div class="hero-content">
+            <h1>The Neighborhood Carwash</h1>
+            <p>Mobile car washing by local high schoolers - we come to you!</p>
+            <button onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" class="cta-button">Schedule Your Mobile Wash</button>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="section">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Exterior Wash</h3>
+                    <p>Complete exterior cleaning including wash, rinse, dry, tire shine, and window cleaning - all at your location.</p>
+                    <div class="price">$20</div>
+                </div>
+                <div class="service-card">
+                    <h3>Interior Detailing</h3>
+                    <p>Full interior service including vacuum, dashboard cleaning, seat cleaning, and detailing to make your inside look brand new.</p>
+                    <div class="price">$50</div>
+                </div>
+                <div class="service-card">
+                    <h3>Complete Package</h3>
+                    <p>Best value! Full exterior wash AND interior detailing - everything your car needs in one convenient service.</p>
+                    <div class="price">$68</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="section">
+            <div class="about-content">
+                <div>
+                    <h2>Your Local Car Care Team</h2>
+                    <p>We're a group of dedicated high school students who are passionate about cars and providing excellent service to our community. What started as a way to earn some extra money has grown into a mission to keep our neighborhood's cars looking their best!</p>
+                    <p>We bring all our own equipment and eco-friendly cleaning supplies right to your driveway. No need to leave your house - we handle everything while you relax at home. Our mobile service is convenient, affordable, and supports local students working toward their goals.</p>
+                    <div class="features">
+                        <div class="feature">✓ 100% mobile service</div>
+                        <div class="feature">✓ Flexible scheduling</div>
+                        <div class="feature">✓ NOLA local</div>
+                        <div class="feature">✓ Student run</div>
+                    </div>
+                </div>
+                <div style="position: relative; height: 400px; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+                    <img src="car.jpg" 
+                         alt="Clean white Mercedes SUV after washing" 
+                         style="width: 100%; height: 100%; object-fit: cover;">
+                    <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.7)); color: white; padding: 2rem; text-align: center;">
+                        <h3 style="margin-bottom: 0.5rem; font-size: 1.8rem;">✨ Professional Results</h3>
+                        <p style="opacity: 0.9; font-size: 1.1rem;">This is what we deliver - right in your driveway!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="section">
+            <h2>Schedule Your Mobile Wash</h2>
+            <p style="font-size: 1.2rem; opacity: 0.9;">Ready for the convenience of mobile car washing? We'll come to you!</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3>📍 Location</h3>
+                    <p>Serving New Orleans<br>& surrounding areas<br>Louisiana</p>
+                </div>
+                <div class="contact-item">
+                    <h3>📱 Instagram</h3>
+                    <p>@carwashes_with_thelads<br>DM us to book!<br>See our work</p>
+                </div>
+                <div class="contact-item">
+                    <h3>👥 The Team</h3>
+                    <div style="width: 100%; height: 200px; border-radius: 10px; overflow: hidden; margin-top: 1rem;">
+                        <img src="team.jpg" 
+                             alt="The Neighborhood Carwash team" 
+                             style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
+                    </div>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.9;">Your local car wash crew!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Create animated water drops
+        function createWaterDrop() {
+            const drop = document.createElement('div');
+            drop.className = 'drop';
+            
+            const size = Math.random() * 10 + 5;
+            const left = Math.random() * 100;
+            const animationDuration = Math.random() * 3 + 2;
+            
+            drop.style.width = size + 'px';
+            drop.style.height = size + 'px';
+            drop.style.left = left + '%';
+            drop.style.animationDuration = animationDuration + 's';
+            
+            document.querySelector('.water-drops').appendChild(drop);
+            
+            setTimeout(() => {
+                drop.remove();
+            }, animationDuration * 1000);
+        }
+
+        // Create water drops periodically
+        setInterval(createWaterDrop, 300);
+
+        // Service card hover effects
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.background = 'linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.background = 'white';
+            });
+        });
+
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe service cards for animation
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
